@@ -5,6 +5,14 @@ var common = require("./webpack.common");
 var mergeCommon = merge.bind(null, common);
 var BuildConstants = require("./build-constants");
 
+var defaultDefs = require("./buildDefinitions");
+
+var defs = merge(defaultDefs, {
+  "process.env": {
+    "NODE_ENV": JSON.stringify("production")
+  }
+});
+
 module.exports = mergeCommon({
   module: {
     loaders: [
@@ -12,11 +20,7 @@ module.exports = mergeCommon({
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      "process.env": {
-        "NODE_ENV": JSON.stringify("production")
-      }
-    }),
+    new webpack.DefinePlugin(defs),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false

@@ -5,10 +5,13 @@ var mergeCommon = merge.bind(null, common);
 
 var BuildConstants = require("./build-constants");
 
+var defaultDefs = require("./buildDefinitions");
+var port = defaultDefs["process.env"]["PORT"];
+
 module.exports = mergeCommon({
   devTool: "eval",
   entry: [
-    "webpack-dev-server/client?http://localhost:3000"
+    "webpack-dev-server/client?http://localhost:" + port
   ],
   module: {
     loaders: [
@@ -16,6 +19,7 @@ module.exports = mergeCommon({
     ]
   },
   plugins: [
+    new webpack.DefinePlugin(defaultDefs),
     new webpack.NoErrorsPlugin()
   ],
   devServer: {
@@ -23,7 +27,7 @@ module.exports = mergeCommon({
       progress: true,
       colors: true
     },
-    port: 3000,
+    port: port,
     contentBase: BuildConstants.OUTPUT,
     historyApiFallback: true
   }

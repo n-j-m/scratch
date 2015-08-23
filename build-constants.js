@@ -5,5 +5,6 @@ module.exports = {
   ENTRY_FOLDER: path.resolve(__dirname, "src"),
   OUTPUT: path.resolve(__dirname, "build"),
   NODE_MODULES: path.resolve(__dirname, "node_modules"),
-  HTML_TEMPLATE: path.resolve(__dirname, "index-template.html")
+  HTML_TEMPLATE: path.resolve(__dirname, "index-template.html"),
+  DEFAULT_PORT: 3001
 };
